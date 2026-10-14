@@ -1,12 +1,15 @@
 # 🧪 Chemical Safety Analyser
 
-An intelligent industrial chemical safety management and incident classification platform. The system leverages **Flask**, **SQLAlchemy**, and **Natural Language Processing (NLP)** to record, monitor, and automatically classify chemical safety incident reports across plant facilities.
+> 🚧 **Project Status: Work in Progress (Active Development)**  
+> **Current Focus:** Exploratory Data Analysis (EDA) and NLP text preprocessing inside [`notebooks/chemical_analyser_nlp.ipynb`](notebooks/chemical_analyser_nlp.ipynb).  
+> *Note: Database schemas and data generation are completed; machine learning modeling is currently underway in the notebook, and backend API routes and frontend interfaces will be built in subsequent phases.*
 
 ---
 
 ## 📌 Table of Contents
 
 - [Overview](#-overview)
+- [Project Status & Current Stage](#-project-status--current-stage)
 - [Key Features](#-key-features)
 - [System Architecture](#-system-architecture)
 - [Database Schema & Domain Models](#-database-schema--domain-models)
@@ -16,11 +19,10 @@ An intelligent industrial chemical safety management and incident classification
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Environment Configuration](#environment-configuration)
-  - [Database Initialization](#database-initialization)
-  - [Running the Application](#running-the-application)
-  - [Running the Notebook](#running-the-notebook)
+  - [Running the Notebook (Current Active Focus)](#running-the-notebook-current-active-focus)
+  - [Running the Flask App (Base Service)](#running-the-flask-app-base-service)
 - [Data Dictionary & Taxonomy](#-data-dictionary--taxonomy)
-- [Roadmap & Next Steps](#-roadmap--next-steps)
+- [Project Roadmap](#-project-roadmap)
 
 ---
 
@@ -32,6 +34,27 @@ The **Chemical Safety Analyser** addresses this challenge by:
 1. Providing a relational data model to track **Operators**, **Chemicals**, **Incident Types**, and **Safety Reports**.
 2. Storing and analyzing over 3,000 incident reports across diverse plant areas (e.g., Catalyst Regeneration Unit, Distillation Columns, Mixing Vessels).
 3. Implementing an NLP pipeline using **spaCy** and **scikit-learn** to preprocess text narratives, standardize chemical units, and automatically predict incident classifications with confidence scoring.
+
+---
+
+## 📍 Project Status & Current Stage
+
+This project is in **active development**, with current work focused entirely on the **data science and NLP exploration phase in Jupyter Notebooks**:
+
+- ✅ **Phase 1: Database Architecture & Data Population (Completed)**
+  - Configured relational models in `models.py` ([Operator](models.py), [Chemical](models.py), [IncidentType](models.py), [Report](models.py), [ReportAnalysis](models.py)).
+  - Initialized SQLite database `database/safety.db` loaded with 3,000 safety incident records.
+- 🔄 **Phase 2: Exploratory Data Analysis & NLP Preprocessing (CURRENT STAGE)**
+  - Actively working inside [`notebooks/chemical_analyser_nlp.ipynb`](notebooks/chemical_analyser_nlp.ipynb).
+  - Inspecting dataset distributions, checking missing values, analyzing word counts.
+  - Applying linguistic processing using `spaCy` (`en_core_web_sm`): tokenization, stop-word filtering, punctuation removal, lemmatization, and chemical temperature normalization (`°C` ➔ `celsius`).
+- ⏳ **Phase 3: Classification Modeling & Evaluation (In Progress / Next)**
+  - TF-IDF vectorization and multi-class classifier training (scikit-learn) within the notebook.
+  - Model evaluation using precision, recall, and confusion matrices.
+- ⏳ **Phase 4: Backend API Development (Upcoming)**
+  - Building RESTful endpoints in `backend/` to serve predictions and incident reporting.
+- ⏳ **Phase 5: Frontend Interface (Upcoming)**
+  - User-facing reporting portal and incident analytics dashboard in `frontend/`.
 
 ---
 
@@ -257,32 +280,13 @@ with app.app_context():
     print("Database tables initialized.")
 ```
 
-### Running the Application
+### Running the Notebook (Current Active Focus)
 
-Start the Flask development server:
-
-```bash
-python app.py
-```
-
-The application will start on port `5500`:
-- **URL**: `http://127.0.0.1:5500/`
-- **Response**:
-  ```json
-  {
-    "status": "success",
-    "message": "Chemical Safety Analyser App"
-  }
-  ```
-
-### Running the Notebook
-
-To view and execute the exploratory data analysis and NLP modeling:
+The core data exploration, text cleaning, and NLP pipeline are actively developed inside the Jupyter notebook:
 
 ```bash
 jupyter notebook notebooks/chemical_analyser_nlp.ipynb
 ```
-
 ---
 
 ## 📊 Data Dictionary & Taxonomy
@@ -303,11 +307,3 @@ jupyter notebook notebooks/chemical_analyser_nlp.ipynb
 | **Contamination** | Foreign material or cross-chemical ingress into production streams. |
 
 ---
-
-## 🗺 Roadmap & Next Steps
-
-- [ ] **RESTful API Endpoints**: Expose endpoints in `backend/` for creating, searching, and filtering safety reports.
-- [ ] **Live NLP Inference Route**: Add `/api/v1/analyze` to accept incident text, run preprocessing, and return predicted incident type with confidence scores.
-- [ ] **Interactive Frontend Dashboard**: Build out `frontend/` with incident trends, chemical hazard heatmaps, and severity breakdown charts.
-- [ ] **Model Persistence**: Export trained classification models (e.g. `joblib` / `onnx`) for production inference.
-- [ ] **Automated Alerting**: Trigger notifications when high or critical severity reports are logged.
