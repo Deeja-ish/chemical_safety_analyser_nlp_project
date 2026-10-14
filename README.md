@@ -48,13 +48,6 @@ This project is in **active development**, with current work focused entirely on
   - Actively working inside [`notebooks/chemical_analyser_nlp.ipynb`](notebooks/chemical_analyser_nlp.ipynb).
   - Inspecting dataset distributions, checking missing values, analyzing word counts.
   - Applying linguistic processing using `spaCy` (`en_core_web_sm`): tokenization, stop-word filtering, punctuation removal, lemmatization, and chemical temperature normalization (`°C` ➔ `celsius`).
-- ⏳ **Phase 3: Classification Modeling & Evaluation (In Progress / Next)**
-  - TF-IDF vectorization and multi-class classifier training (scikit-learn) within the notebook.
-  - Model evaluation using precision, recall, and confusion matrices.
-- ⏳ **Phase 4: Backend API Development (Upcoming)**
-  - Building RESTful endpoints in `backend/` to serve predictions and incident reporting.
-- ⏳ **Phase 5: Frontend Interface (Upcoming)**
-  - User-facing reporting portal and incident analytics dashboard in `frontend/`.
 
 ---
 
@@ -65,40 +58,6 @@ This project is in **active development**, with current work focused entirely on
 - **Domain-Specific Text Normalization**: Custom NLP preprocessors that normalize temperature units (`°C` ➔ `celsius`), rectify lemma anomalies (e.g., `datum` ➔ `data`), and filter out non-essential stop words and punctuation.
 - **Automated Incident Classification**: Text classification workflow to predict incident categories based on incident log descriptions.
 - **Modular Project Structure**: Clean separation of database models, configurations, data science notebooks, and application layers.
-
----
-
-## 🏛 System Architecture
-
-```mermaid
-flowchart TD
-    subgraph Data Layer
-        DB[(SQLite: safety.db)]
-        CSV1[chemical_safety_analyser_data.csv]
-        CSV2[analysed_data.csv]
-    end
-
-    subgraph Core Backend
-        APP[Flask App app.py]
-        CFG[Config config.py]
-        MODELS[ORM Models models.py]
-        APP --> CFG
-        APP --> MODELS
-        MODELS <--> DB
-    end
-
-    subgraph Analytics & NLP Pipeline
-        NB[Jupyter Notebook: chemical_analyser_nlp.ipynb]
-        SPACY[spaCy Lemmatizer & Preprocessor]
-        TFIDF[scikit-learn TF-IDF / Classifier]
-        DB --> NB
-        NB --> SPACY
-        SPACY --> TFIDF
-        TFIDF --> ML_OUT[Predicted Classification & Confidence]
-    end
-
-    ML_OUT -.->|Stores predictions| DB
-```
 
 ---
 
