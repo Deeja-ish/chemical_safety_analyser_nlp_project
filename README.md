@@ -13,16 +13,6 @@
 - [Key Features](#-key-features)
 - [System Architecture](#-system-architecture)
 - [Database Schema & Domain Models](#-database-schema--domain-models)
-- [NLP & Machine Learning Pipeline](#-nlp--machine-learning-pipeline)
-- [Project Directory Structure](#-project-directory-structure)
-- [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Environment Configuration](#environment-configuration)
-  - [Running the Notebook (Current Active Focus)](#running-the-notebook-current-active-focus)
-  - [Running the Flask App (Base Service)](#running-the-flask-app-base-service)
-- [Data Dictionary & Taxonomy](#-data-dictionary--taxonomy)
-- [Project Roadmap](#-project-roadmap)
 
 ---
 
